@@ -1,8 +1,9 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: redis
 spec:
+  serviceName: "redis"  # Headless service is required
   replicas: 1
   selector:
     matchLabels:
@@ -20,7 +21,12 @@ spec:
           volumeMounts:
             - name: redis-data
               mountPath: /data
-      volumes:
-        - name: redis-data
-          persistentVolumeClaim:
-            claimName: redis-pvc
+  volumeClaimTemplates:
+    - metadata:
+        name: redis-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: gp2-csi  # or your StorageClass
+        resources:
+          requests:
+            storage: 5Gi
