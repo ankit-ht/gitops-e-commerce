@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      serviceAccountName: ecr-reader
+      containers:
+        - name: backend
+          image: 016311861830.dkr.ecr.us-east-1.amazonaws.com/dev/ecom-backend
+          ports:
+            - containerPort: 5000
+          env:
+            - name: REDIS_HOST
+              value: redis
+            - name: MONGO_URI
+              value: mongodb://mongodb:27017/ecommerce
+            - name: REDIS_PORT
+              value: "6379"
+            - name: PORT
+              value: "5000"            

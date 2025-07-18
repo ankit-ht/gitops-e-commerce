@@ -18,3 +18,7 @@ spec:
           image: 016311861830.dkr.ecr.us-east-1.amazonaws.com/dev/ecom-frontend:latest
           ports:
             - containerPort: 3000  
+          env:
+            - name: REACT_APP_BACKEND_URL
+              value: http://backend.default.svc.cluster.local
+

@@ -16,7 +16,7 @@ kubectl patch deployment argocd-server -n argocd \
   --name ecom-cluster \
   --region us-east-1 \
   --nodegroup-name ecom-nodes \
-  --node-type t3.small \
+  --node-type t3.large \
   --nodes 1 \
   --nodes-min 1 \
   --nodes-max 2 \
@@ -62,7 +62,7 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n ku
   --set serviceAccount.create=false \
   --set serviceAccount.name=aws-load-balancer-controller \
   --set region=us-east-1 \
-  --set vpcId=vpc-080336135385de316
+  --set vpcId=vpc-015e13c0094c22005
 
 # Setting up argocd
 --> Create policy and then role and attach role to the policy with oidc 
