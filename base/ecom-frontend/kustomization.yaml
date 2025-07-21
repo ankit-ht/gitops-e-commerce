@@ -4,7 +4,7 @@ resources:
   - ingress.yaml
 
 generators:
-  - secret.enc.yaml
+  - secrets.enc.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
