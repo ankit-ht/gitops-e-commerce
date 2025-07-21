@@ -15,7 +15,7 @@ spec:
       serviceAccountName: ecr-reader
       containers:
         - name: backend
-          image: 016311861830.dkr.ecr.us-east-1.amazonaws.com/dev/ecom-backend
+          image: 016311861830.dkr.ecr.us-east-1.amazonaws.com/dev/ecom-backend:latest
           ports:
             - containerPort: 5000
           env:
@@ -26,4 +26,6 @@ spec:
             - name: REDIS_PORT
               value: "6379"
             - name: PORT
-              value: "5000"            
+              value: "5000"  
+            - name: JWT_SECRET
+              value: "supersecret"          
