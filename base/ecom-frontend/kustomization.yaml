@@ -2,3 +2,6 @@ resources:
   - deployment.enc.yaml
   - service.yaml
   - ingress.yaml
+
+generators:
+  - ksops-secret.yaml
