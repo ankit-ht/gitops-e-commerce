@@ -2,3 +2,9 @@ resources:
   - deployment.yaml
   - service.yaml
   - ingress.yaml
+
+generators:
+  - secret.enc.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
