@@ -1,4 +1,4 @@
 resources:
-  - deployment.yaml
+  - deployment.enc.yaml
   - service.yaml
   - ingress.yaml
