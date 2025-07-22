@@ -20,5 +20,5 @@ spec:
             - containerPort: 3000  
           env:
             - name: REACT_APP_BACKEND_URL
-              value: http://ad5816b14c5f1428b93c928688df1d33-1941492078.us-east-1.elb.amazonaws.com
+              value: http://aa86d1069bcac4360a93d7228a8a7b70-1578860455.us-east-1.elb.amazonaws.com
 
