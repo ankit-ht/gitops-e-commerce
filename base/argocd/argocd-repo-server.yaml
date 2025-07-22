@@ -30,9 +30,17 @@ spec:
             - mountPath: /usr/local/bin/kustomize
               name: custom-tools
               subPath: kustomize
+
             - mountPath: /usr/local/bin/ksops
               name: custom-tools
               subPath: ksops
+
+            - mountPath: /custom-tools/viaduct.ai/v1/ksops/ksops
+              name: custom-tools
+              subPath: ksops
+          env:
+            - name: KUSTOMIZE_PLUGIN_HOME
+              value: /custom-tools
         ## If you use AWS or GCP KMS, don't forget to include the necessary credentials to decrypt the secrets!
         # env:
         #  - name: AWS_ACCESS_KEY_ID
