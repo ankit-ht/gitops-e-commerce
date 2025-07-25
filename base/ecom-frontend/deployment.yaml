@@ -17,8 +17,9 @@ spec:
         - name: frontend
           image: 016311861830.dkr.ecr.us-east-1.amazonaws.com/dev/ecom-frontend:latest
           ports:
-            - containerPort: 3000  
+            - containerPort: 5173 
+          command: ["npm", "run", "dev", "--", "--host"]
           env:
-            - name: REACT_APP_BACKEND_URL
-              value: http://aa86d1069bcac4360a93d7228a8a7b70-1578860455.us-east-1.elb.amazonaws.com
+            - name: VITE_BACKEND_URL
+              value: http://3.239.59.47:31849
 
