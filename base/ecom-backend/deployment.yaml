@@ -15,7 +15,7 @@ spec:
       serviceAccountName: ecr-reader
       containers:
         - name: backend
-          image: 016311861830.dkr.ecr.us-east-1.amazonaws.com/dev/ecom-backend:latest
+          image: 016311861830.dkr.ecr.us-east-1.amazonaws.com/dev/ecom-backend
           ports:
             - containerPort: 5000
           env:
