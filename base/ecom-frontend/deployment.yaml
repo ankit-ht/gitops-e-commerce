@@ -15,7 +15,7 @@ spec:
       serviceAccountName: ecr-reader
       containers:
         - name: frontend
-          image: 016311861830.dkr.ecr.us-east-1.amazonaws.com/dev/ecom-frontend:latest
+          image: 016311861830.dkr.ecr.us-east-1.amazonaws.com/dev/ecom-frontend
           ports:
             - containerPort: 5173 
           command: ["npm", "run", "dev", "--", "--host"]
