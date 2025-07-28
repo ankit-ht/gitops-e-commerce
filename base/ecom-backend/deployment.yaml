@@ -26,4 +26,8 @@ spec:
             - name: PORT
               value: "5000"  
             - name: JWT_KEY
-              value: "supersecret"          
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
+        

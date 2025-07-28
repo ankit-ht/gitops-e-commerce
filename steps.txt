@@ -11,6 +11,7 @@ kubectl patch deployment argocd-server -n argocd \
     }
   ]'
 
+kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 --decode
 
 1) eksctl create cluster \
   --name ecom-cluster \
@@ -97,7 +98,7 @@ eksctl create addon \
   --service-account-role-arn arn:aws:iam::016311861830:role/AmazonEKS_EBS_CSI_DriverRole \
   --force
 
-kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 --decode
+
 
 
 arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess
