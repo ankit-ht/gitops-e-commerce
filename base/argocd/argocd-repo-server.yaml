@@ -6,50 +6,28 @@ metadata:
 spec:
   template:
     spec:
-      # 1. Define an emptyDir volume which will hold the custom binaries
-      volumes:
-        - name: custom-tools
-          emptyDir: {}
-      # 2. Use an init container to download/copy custom binaries into the emptyDir
       initContainers:
         - name: install-ksops
-          image: viaductoss/ksops:v4.3.3
+          image: viaductoss/ksops:v3.0.1
           command: ["/bin/sh", "-c"]
           args:
             - echo "Installing KSOPS...";
-              mv ksops /custom-tools/;
-              mv kustomize /custom-tools/;
+              export PKG_NAME=ksops;
+              mv ${PKG_NAME}.so /custom-tools/;
+              mv $GOPATH/bin/kustomize /custom-tools/;
               echo "Done.";
           volumeMounts:
             - mountPath: /custom-tools
               name: custom-tools
-      # 3. Volume mount the custom binary to the bin directory (overriding the existing version)
       containers:
-        - name: argocd-repo-server
-          volumeMounts:
-            - mountPath: /usr/local/bin/kustomize
-              name: custom-tools
-              subPath: kustomize
-
-            - mountPath: /usr/local/bin/ksops
-              name: custom-tools
-              subPath: ksops
-
-            - mountPath: /custom-tools/viaduct.ai/v1/ksops/ksops
-              name: custom-tools
-              subPath: ksops
-          env:
-            - name: KUSTOMIZE_PLUGIN_HOME
-              value: /custom-tools
-        ## If you use AWS or GCP KMS, don't forget to include the necessary credentials to decrypt the secrets!
-        # env:
-        #  - name: AWS_ACCESS_KEY_ID
-        #    valueFrom:
-        #      secretKeyRef:
-        #        name: argocd-aws-credentials
-        #        key: accesskey
-        #  - name: AWS_SECRET_ACCESS_KEY
-        #    valueFrom:
-        #      secretKeyRef:
-        #        name: argocd-aws-credentials
-        #        key: secretkey
+      - name: argocd-repo-server
+        volumeMounts:
+        - mountPath: /usr/local/bin/kustomize
+          name: custom-tools
+          subPath: kustomize
+        - mountPath: /.config/kustomize/plugin/viaduct.ai/v1/ksops/ksops
+          name: custom-tools
+          subPath: ksops
+      volumes:
+      - name: custom-tools
+        emptyDir: {}

@@ -62,7 +62,7 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n ku
   --set serviceAccount.create=false \
   --set serviceAccount.name=aws-load-balancer-controller \
   --set region=us-east-1 \
-  --set vpcId=vpc-015e13c0094c22005
+  --set vpcId=vpc-0594c2314721320e0
 
 # Setting up argocd
 --> Create policy and then role and attach role to the policy with oidc 
@@ -94,7 +94,8 @@ eksctl create addon \
   --name aws-ebs-csi-driver \
   --cluster ecom-cluster \
   --region us-east-1 \
-  --service-account-role-arn arn:aws:iam::016311861830:role/AmazonEKS_EBS_CSI_DriverRole
+  --service-account-role-arn arn:aws:iam::016311861830:role/AmazonEKS_EBS_CSI_DriverRole \
+  --force
 
 kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 --decode
 
@@ -109,6 +110,13 @@ eksctl create iamserviceaccount \
   --approve \
   --override-existing-serviceaccounts
 
+eksctl create iamserviceaccount \
+  --name argocd-sa \
+  --namespace argocd \
+  --cluster ecom-cluster \
+  --attach-policy-arn arn:aws:iam::016311861830:policy/ArgoCDKMSAccessPolicy \
+  --approve \
+  --override-existing-serviceaccounts
 
 
 

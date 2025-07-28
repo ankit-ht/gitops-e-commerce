@@ -20,7 +20,7 @@ spec:
             - containerPort: 5000
           env:
             - name: FRONTEND_URL
-              value: http://k8s-default-fronting-cec4ac6efc-1458713874.us-east-1.elb.amazonaws.com
+              value: http://k8s-default-fronting-cec4ac6efc-1931077709.us-east-1.elb.amazonaws.com
             - name: DB
               value: mongodb://mongodb:27017/project7
             - name: PORT
