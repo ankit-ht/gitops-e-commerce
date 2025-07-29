@@ -63,7 +63,7 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n ku
   --set serviceAccount.create=false \
   --set serviceAccount.name=aws-load-balancer-controller \
   --set region=us-east-1 \
-  --set vpcId=vpc-0594c2314721320e0
+  --set vpcId=vpc-01ea5c8b66af07d01
 
 # Setting up argocd
 --> Create policy and then role and attach role to the policy with oidc 

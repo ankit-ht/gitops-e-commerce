@@ -1,0 +1,12 @@
+resources:
+  - ../../../base/ecom-frontend
+
+configMapGenerator:
+  - name: frontend-env
+    envs:
+      - .env
+
+images:
+- name: 016311861830.dkr.ecr.us-east-1.amazonaws.com/dev/ecom-frontend
+  newName: 016311861830.dkr.ecr.us-east-1.amazonaws.com/dev/ecom-frontend
+  newTag: 904cbee

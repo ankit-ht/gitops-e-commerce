@@ -18,13 +18,7 @@ spec:
           image: 016311861830.dkr.ecr.us-east-1.amazonaws.com/dev/ecom-backend
           ports:
             - containerPort: 5000
-          env:
-            - name: FRONTEND_URL
-              value: http://k8s-default-fronting-cec4ac6efc-1931077709.us-east-1.elb.amazonaws.com
-            - name: DB
-              value: mongodb://mongodb:27017/project7
-            - name: PORT
-              value: "5000"  
-            - name: JWT_KEY
-              value: "supersecret"
+          envFrom:
+            - configMapRef:
+                name: backend-env
         

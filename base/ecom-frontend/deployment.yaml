@@ -19,7 +19,7 @@ spec:
           ports:
             - containerPort: 5173 
           command: ["npm", "run", "dev", "--", "--host"]
-          env:
-            - name: VITE_BACKEND_URL
-              value: http://44.200.192.200:31464
+          envFrom:
+            - configMapRef:
+                name: frontend-env
 
