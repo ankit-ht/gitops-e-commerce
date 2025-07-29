@@ -14,6 +14,6 @@ configMapGenerator:
     envs:
       - .env
 
-generators:
-  - ./secret-generator.yaml
+# generators:
+#   - ./secret-generator.yaml
 

@@ -21,9 +21,9 @@ spec:
           envFrom:
             - configMapRef:
                 name: backend-env
-          env: 
-            valueFrom:
-                secretKeyRef:
-                  name: jwt-secret
-                  key: JWT_KEY
+          # env: 
+          #   valueFrom:
+          #       secretKeyRef:
+          #         name: jwt-secret
+          #         key: JWT_KEY
         
