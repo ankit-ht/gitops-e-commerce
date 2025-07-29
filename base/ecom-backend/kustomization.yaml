@@ -9,6 +9,11 @@ images:
   newName: 016311861830.dkr.ecr.us-east-1.amazonaws.com/dev/ecom-backend
   newTag: a5ce28f
 
+configMapGenerator:
+  - name: backend-env
+    envs:
+      - .env
+
 # generators:
 #   - ./secret-generator.yaml
 

@@ -7,3 +7,8 @@ images:
 - name: 016311861830.dkr.ecr.us-east-1.amazonaws.com/dev/ecom-frontend
   newName: 016311861830.dkr.ecr.us-east-1.amazonaws.com/dev/ecom-frontend
   newTag: 904cbee
+
+configMapGenerator:
+  - name: frontend-env
+    envs:
+      - .env
