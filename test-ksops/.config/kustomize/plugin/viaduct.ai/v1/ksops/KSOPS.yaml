@@ -1,0 +1,4 @@
+apiVersion: viaduct.ai/v1
+kind: KSOPS
+metadata:
+  name: ksops
