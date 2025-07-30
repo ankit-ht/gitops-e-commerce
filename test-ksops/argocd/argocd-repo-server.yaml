@@ -1,0 +1,27 @@
+# argo-cd-repo-server-ksops-patch.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: argocd-repo-server
+spec:
+  template:
+    spec:
+      initContainers:
+        - name: install-ksops
+          image: viaductoss/ksops:v4.2.1
+          command: ["/bin/sh", "-c"]
+          args:
+            - cp /ksops /custom-tools/ksops;
+          volumeMounts:
+            - mountPath: /custom-tools
+              name: custom-tools
+      containers:
+        - name: repo-server
+          image: quay.io/argoproj/argocd:v3.0.6  # ⬅️ Make sure to include this
+          volumeMounts:
+            - mountPath: /usr/local/bin/ksops
+              name: custom-tools
+              subPath: ksops
+      volumes:
+        - name: custom-tools
+          emptyDir: {}
