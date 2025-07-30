@@ -3,4 +3,4 @@ resources:
   - service.yaml
 
 generators:
-  - secret-generator.yaml
+  - secret.enc.yaml
