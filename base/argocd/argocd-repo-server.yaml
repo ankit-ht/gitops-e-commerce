@@ -8,7 +8,7 @@ spec:
     spec:
       initContainers:
         - name: install-ksops
-          image: viaductoss/ksops:v3.0.1
+          image: viaductoss/ksops:v4.3.3
           command: ["/bin/sh", "-c"]
           args:
             - |

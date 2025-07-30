@@ -63,7 +63,7 @@ helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n ku
   --set serviceAccount.create=false \
   --set serviceAccount.name=aws-load-balancer-controller \
   --set region=us-east-1 \
-  --set vpcId=vpc-01ea5c8b66af07d01
+  --set vpcId=vpc-009f4b5d4907559b5
 
 # Setting up argocd
 --> Create policy and then role and attach role to the policy with oidc 
@@ -118,6 +118,23 @@ eksctl create iamserviceaccount \
   --attach-policy-arn arn:aws:iam::016311861830:policy/ArgoCDKMSAccessPolicy \
   --approve \
   --override-existing-serviceaccounts
+
+
+# Adding Store CSI driver
+CLUSTER_NAME="ecom-cluster"
+OIDC_PROVIDER="oidc.eks.us-east-1.amazonaws.com/id/666B02BD075156AD0AB4A6722FF90BC7"
+NAMESPACE="default"
+SA_NAME="ssm-access-sa"
+ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+
+helm repo add secrets-store-csi-driver https://kubernetes-sigs.github.io/secrets-store-csi-driver/charts
+helm repo update
+
+helm upgrade --install csi-secrets-store secrets-store-csi-driver/secrets-store-csi-driver \
+  --namespace kube-system \
+  --set syncSecret.enabled=true
+
+kubectl apply -f https://raw.githubusercontent.com/aws/secrets-store-csi-driver-provider-aws/main/deployment/aws-provider-installer.yaml
 
 
 

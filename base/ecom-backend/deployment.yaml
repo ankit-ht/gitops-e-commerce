@@ -21,9 +21,21 @@ spec:
           envFrom:
             - configMapRef:
                 name: backend-env
-          # env: 
-          #   valueFrom:
-          #       secretKeyRef:
-          #         name: jwt-secret
-          #         key: JWT_KEY
+      #     env: 
+      #     - name: JWT_KEY
+      #       valueFrom:
+      #           secretKeyRef:
+      #             name: jwt-secret
+      #             key: JWT_KEY
+      #     volumeMounts:
+      #       - mountPath: /mnt/secrets-store 
+      #         name: secrets-store
+      #         readOnly: true
+      # volumes:
+      #   - name: secrets-store
+      #     csi:
+      #       driver: secrets-store.csi.k8s.io
+      #       readOnly: true
+      #       volumeAttributes:
+      #         secretProviderClass: aws-ssm-jwt
         

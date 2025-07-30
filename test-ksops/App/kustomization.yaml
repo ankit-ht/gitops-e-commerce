@@ -1,6 +1,0 @@
-resources:
-  - deployment.yaml
-  - service.yaml
-
-generators:
-  - secret.enc.yaml
