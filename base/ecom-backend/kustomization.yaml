@@ -11,10 +11,6 @@ images:
   newTag: a5ce28f
 
 configMapGenerator:
-  - name: backend-env
-    envs:
-      - .env
-
-# generators:
-#   - ./secret-generator.yaml
-
+- envs:
+  - .env
+  name: backend-env
