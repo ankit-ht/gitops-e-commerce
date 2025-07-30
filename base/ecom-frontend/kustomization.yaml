@@ -6,7 +6,7 @@ resources:
 images:
 - name: 016311861830.dkr.ecr.us-east-1.amazonaws.com/dev/ecom-frontend
   newName: 016311861830.dkr.ecr.us-east-1.amazonaws.com/dev/ecom-frontend
-  newTag: "3291e71"
+  newTag: ae56ad1
 
 configMapGenerator:
 - envs:
