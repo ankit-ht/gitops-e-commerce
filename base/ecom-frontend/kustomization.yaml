@@ -9,6 +9,8 @@ images:
   newTag: 904cbee
 
 configMapGenerator:
-  - name: frontend-env
-    envs:
-      - .env
+- envs:
+  - .env
+  name: frontend-env
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
