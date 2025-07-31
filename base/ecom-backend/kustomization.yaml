@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
 - deployment.yaml
 - service.yaml
-- secret-provider-class.yaml
 
 images:
 - name: 016311861830.dkr.ecr.us-east-1.amazonaws.com/dev/ecom-backend
