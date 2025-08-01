@@ -1,0 +1,37 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres-cluster
+  namespace: default
+spec:
+  serviceAccountTemplate:
+    metadata:
+      name: cnpg-postgres
+      annotations:
+        eks.amazonaws.com/role-arn: arn:aws:iam::016311861830:role/s3-access-role
+
+  instances: 3
+  imageName: ghcr.io/cloudnative-pg/postgresql:15.4
+
+  storage:
+    size: 1Gi
+    storageClass: gp2-csi
+
+  superuserSecret:
+    name: postgres-superuser-secret
+
+  bootstrap:
+    initdb:
+      database: appdb
+      owner: app
+      secret:
+        name: app-user-secret
+
+  backup:
+    barmanObjectStore:
+      destinationPath: s3://postgres-backup-demo
+      endpointURL: https://s3.amazonaws.com
+      s3Credentials:
+        inheritFromIAMRole: true
+      wal:
+        compression: gzip

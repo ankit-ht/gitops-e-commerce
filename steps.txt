@@ -111,6 +111,16 @@ eksctl create iamserviceaccount \
   --approve \
   --override-existing-serviceaccounts
 
+arn:aws:iam::aws:policy/AmazonS3FullAccess
+
+eksctl create iamserviceaccount \
+  --name s3acess \
+  --namespace default \
+  --cluster ecom-cluster \
+  --attach-policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess \
+  --approve \
+  --override-existing-serviceaccounts
+
 
 
 
