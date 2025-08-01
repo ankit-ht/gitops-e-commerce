@@ -11,19 +11,19 @@ spec:
       volumes:
         - name: custom-tools
           emptyDir: {}
-        - name: sops-config  # ← This was missing
+        - name: sops-config
           configMap:
             name: sops-config
       # 2. Use an init container to download/copy custom binaries into the emptyDir
       initContainers:
         - name: install-ksops
-          image: viaductoss/ksops:v4.3.3
+          # Match Argo CD Go version
+          image: viaductoss/ksops:v2.1.2-go-1.14
           command: ["/bin/sh", "-c"]
           args:
-            - |
-              echo "Installing KSOPS...";
-              cp /usr/local/bin/kustomize /custom-tools/kustomize;
-              cp /usr/local/bin/ksops /custom-tools/ksops;
+            - echo "Installing KSOPS plugin (.so)...";
+              cp ksops.so /custom-tools/ksops.so;
+              cp /go/bin/kustomize /custom-tools/kustomize;
               echo "Done.";
           volumeMounts:
             - mountPath: /custom-tools
@@ -36,11 +36,11 @@ spec:
               name: custom-tools
               subPath: kustomize
               # Verify this matches a XDG_CONFIG_HOME=/.config env variable
-            - mountPath: /.config/kustomize/plugin/viaduct.ai/v1/ksops/ksops
+            - mountPath: /.config/kustomize/plugin/viaduct.ai/v1/ksops/ksops.so
               name: custom-tools
-              subPath: ksops
-            - mountPath: /.config/sops
-              name: sops-config
+              subPath: ksops.so
+            - name: sops-config
+              mountPath: /.config/sops
               subPath: .sops.yaml
           # 4. Set the XDG_CONFIG_HOME env variable to allow kustomize to detect the plugin
           env:
